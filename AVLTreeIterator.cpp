@@ -1,35 +1,9 @@
-#if !defined (AVLTREEITERATOR_H)
-#define AVLTREEITERATOR_H
+#if !defined (NULL)
+#define NULL 0
+#endif
 
-#include "AVLTreeNode.h"
-#include <queue>
-using namespace std;
-
-template < class T >
-class AVLTreeIterator
-{
-
-   private:
-      queue<T>* q;
-      AVLTreeNode<T>* root;
-
-      void inorder(AVLTreeNode<T>* tNode);
-      void preorder(AVLTreeNode<T>* tNode);
-      void postorder(AVLTreeNode<T>* tNode);
-
-   public:
-      ~AVLTreeIterator();
-      AVLTreeIterator(AVLTreeNode<T>* root);
-
-      bool hasNext();
-      T next();
-
-      void setInorder();
-      void setPreorder();
-      void setPostorder();
-	  void dequeueAll();
-
-};
+#include "AVLTreeIterator.h"
+using DataLib::AVLTreeIterator;
 
 template < class T >
 AVLTreeIterator<T>::AVLTreeIterator(AVLTreeNode<T>* root)
@@ -121,5 +95,3 @@ void AVLTreeIterator<T>::dequeueAll()
 		q->pop();
 	}
 }
-
-#endif

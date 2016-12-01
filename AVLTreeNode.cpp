@@ -1,45 +1,9 @@
-#if !defined (AVLTREENODE_H)
-#define AVLTREENODE_H
+#if !defined (NULL)
+#define NULL 0
+#endif
 
-#include "AVL.h"
-#include "2111/GUI/Color.h"
-#include "2111/GUI/Circle.h"
-
-
-template < class T >
-class AVLTreeNode
-{
-   private:
-      AVL balanceFactor;
-
-      AVLTreeNode<T>* left;
-      AVLTreeNode<T>* right;
-
-      T item;
-
-   public:
-   
-      AVLTreeNode(T item);
-      ~AVLTreeNode();
-
-      AVLTreeNode<T>* getLeft();
-      AVLTreeNode<T>* getRight();
-      T getItem();
-
-      void setLeft(AVLTreeNode<T>* l);
-      void setRight(AVLTreeNode<T>* r);
-      void setItem(T data);
-
-      void setBalanceFactor(AVL bf);
-      AVL getBalanceFactor();
-
-      void insertLeft();
-      void insertRight();
-
-      void removeLeft();
-      void removeRight();
-	  void draw(wxDC& dc, int x, int y);
-};
+#include "AVLTreeNode.h"
+using DataLib::AVLTreeNode;
 
 template < class T >
 AVLTreeNode<T>::AVLTreeNode(T data)
@@ -150,31 +114,3 @@ void AVLTreeNode<T>::removeRight()
 {
    insertLeft();
 }
-
-template < class T >
-void AVLTreeNode<T>::draw(wxDC& dc, int x, int y)
-{
-   T item = getItem();
-   string key = item;
-   Color* color;
-
-   if (balanceFactor == BALANCED)
-   {
-      color = new Color(0.05098, 0.3372549, 0.65098);
-   }
-   else if (balanceFactor == LEFT_HEAVY)
-   {
-      color = new Color(1.0, 0.34902, 0.0);      
-   }
-   else
-   {
-      color = new Color(1.0, 0.77647, 0.0); 
-   }
-
-   Circle* circle = new Circle(color, 20, key);
-   circle->draw(dc, x, y);
-
-   delete circle;
-}
-
-#endif
